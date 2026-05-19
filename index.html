@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>By Thandeka — Homemade Bakery, PMB</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FDF6F0;
+  --blush:#F2D5D5;
+  --mint:#C8E6DC;
+  --lavender:#DDD4F0;
+  --tan:#C4977A;
+  --brown:#7B4F35;
+  --dark:#2C1507;
+  --muted:#A07858;
+  --white:#FFFCF9;
+  --display:'Cormorant Garamond',Georgia,serif;
+  --body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--white);color:var(--dark);font-size:16px;line-height:1.7}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(253,246,240,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(196,151,122,0.15);
+  padding:0 6%;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:var(--display);font-size:1.5rem;font-style:italic;color:var(--brown)}
+.nav-logo span{font-style:normal;font-size:0.68rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--tan);display:block;line-height:1.2}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.8rem;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:var(--brown)}
+.nav-wa{background:var(--brown)!important;color:var(--cream)!important;padding:0.5rem 1.2rem;border-radius:50px}
+.nav-wa:hover{background:var(--tan)!important;color:var(--cream)!important}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-toggle span{width:22px;height:1.5px;background:var(--brown);border-radius:2px}
+.mobile-nav{display:none;position:fixed;top:68px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(196,151,122,0.2);padding:1.5rem 6%;z-index:99;flex-direction:column;gap:1rem}
+.mobile-nav a{text-decoration:none;color:var(--brown);font-size:1rem;font-weight:500;padding:0.5rem 0;border-bottom:0.5px solid rgba(196,151,122,0.15)}
+.mobile-nav.open{display:flex}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--cream);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero-left{padding:8rem 5% 5rem 8%;display:flex;flex-direction:column;justify-content:center;animation:fadeUp 0.9s ease both}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:var(--blush);color:var(--brown);font-size:0.72rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:50px;margin-bottom:2rem;width:fit-content}
+.hero-pill::before{content:'';width:6px;height:6px;background:var(--tan);border-radius:50%}
+.hero h1{font-family:var(--display);font-size:clamp(3rem,5vw,4.8rem);font-weight:600;color:var(--brown);line-height:1.1;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--tan)}
+.hero-sub{color:var(--muted);font-size:1rem;max-width:420px;margin-bottom:2.5rem;line-height:1.9}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-family:var(--body);font-size:0.85rem;font-weight:500;letter-spacing:0.06em;padding:0.9rem 2rem;border-radius:50px;transition:all 0.25s;cursor:pointer;border:none}
+.btn-primary{background:var(--brown);color:var(--cream)}
+.btn-primary:hover{background:var(--tan)}
+.btn-ghost{background:transparent;color:var(--brown);border:1.5px solid rgba(123,79,53,0.3)}
+.btn-ghost:hover{border-color:var(--brown)}
+.hero-trust{display:flex;gap:2.5rem;margin-top:3rem}
+.trust-item .num{font-family:var(--display);font-size:1.8rem;font-weight:600;color:var(--brown);line-height:1}
+.trust-item .lbl{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.hero-right{position:relative;overflow:hidden;animation:fadeIn 1s ease both}
+.hero-right::before{content:'';position:absolute;left:-2px;top:0;bottom:0;width:70px;background:var(--cream);clip-path:ellipse(70px 55% at 0% 50%);z-index:2}
+.hero-img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-badge{position:absolute;bottom:2.5rem;right:2.5rem;z-index:3;background:var(--cream);border-radius:16px;padding:1rem 1.4rem;text-align:center}
+.hero-badge .big{font-family:var(--display);font-size:2rem;font-weight:600;color:var(--brown);line-height:1}
+.hero-badge .small{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+
+/* MARQUEE */
+.marquee{background:var(--brown);overflow:hidden;padding:0.8rem 0;white-space:nowrap}
+.marquee-track{display:inline-block;animation:marquee 28s linear infinite;font-size:0.78rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--cream)}
+.mdot{color:var(--tan);margin:0 1.5rem}
+
+/* SECTIONS */
+section{padding:6rem 8%}
+.stag{font-size:0.72rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--tan);margin-bottom:0.6rem}
+.stitle{font-family:var(--display);font-size:clamp(2rem,4vw,3rem);color:var(--brown);line-height:1.2;margin-bottom:1rem}
+.ssub{color:var(--muted);max-width:500px;margin-bottom:3.5rem;font-size:0.98rem;line-height:1.9}
+
+/* MENU */
+.menu-sec{background:var(--white)}
+.tabs{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.tab{padding:0.5rem 1.4rem;border-radius:50px;border:1.5px solid rgba(123,79,53,0.2);background:transparent;color:var(--muted);font-size:0.8rem;font-weight:500;font-family:var(--body);letter-spacing:0.05em;cursor:pointer;transition:all 0.2s}
+.tab:hover,.tab.on{background:var(--brown);color:var(--cream);border-color:var(--brown)}
+.mpanel{display:none}
+.mpanel.on{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem}
+.mcard{background:var(--cream);border-radius:20px;overflow:hidden;transition:transform 0.25s}
+.mcard:hover{transform:translateY(-5px)}
+.mcard-img{height:170px;overflow:hidden;position:relative}
+.mcard-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s}
+.mcard:hover .mcard-img img{transform:scale(1.05)}
+.mcard-body{padding:1rem 1.2rem 1.3rem}
+.mcard-name{font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--brown);margin-bottom:0.3rem}
+.mcard-desc{font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;line-height:1.55}
+.mcard-foot{display:flex;align-items:center;justify-content:space-between}
+.mcard-price{font-weight:500;color:var(--tan);font-size:0.9rem}
+.mcard-btn{background:var(--brown);color:var(--cream);border:none;border-radius:50px;padding:0.35rem 0.9rem;font-size:0.75rem;font-weight:500;font-family:var(--body);cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block}
+.mcard-btn:hover{background:var(--tan)}
+.toppings-note{margin-top:2rem;background:var(--blush);border-radius:14px;padding:1rem 1.5rem;font-size:0.88rem;color:var(--brown);line-height:1.8}
+
+/* ABOUT */
+.about-sec{background:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;gap:1rem;height:480px}
+.about-img-big{grid-row:span 2;border-radius:20px;overflow:hidden}
+.about-img-big img,.about-img-sm img{width:100%;height:100%;object-fit:cover;display:block;border-radius:20px}
+.about-img-sm{border-radius:20px;overflow:hidden}
+.about-stats{display:flex;gap:2.5rem;margin-top:2.5rem}
+.stat .num{font-family:var(--display);font-size:2.4rem;font-weight:600;color:var(--brown);line-height:1}
+.stat .lbl{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+
+/* DELIVERY */
+.delivery-sec{background:var(--lavender)}
+.del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.del-card{background:rgba(255,255,255,0.75);border-radius:20px;padding:2rem;text-align:center}
+.del-icon{font-size:2rem;margin-bottom:1rem}
+.del-title{font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--brown);margin-bottom:0.4rem}
+.del-price{font-family:var(--display);font-size:2rem;font-weight:600;color:var(--tan);line-height:1;margin-bottom:0.4rem}
+.del-desc{font-size:0.83rem;color:var(--muted);line-height:1.6}
+
+/* ORDER */
+.order-sec{background:var(--white)}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.oform{background:var(--cream);border-radius:24px;padding:2.5rem}
+.oform-title{font-family:var(--display);font-size:1.6rem;font-weight:600;color:var(--brown);margin-bottom:1.5rem}
+.fg{margin-bottom:1.2rem}
+.fl{display:block;font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.45rem}
+.fi,.fs,.fta{width:100%;padding:0.75rem 1rem;border:1.5px solid rgba(123,79,53,0.18);border-radius:12px;background:var(--white);font-family:var(--body);font-size:0.92rem;color:var(--dark);outline:none;transition:border 0.2s;-webkit-appearance:none}
+.fi:focus,.fs:focus,.fta:focus{border-color:var(--tan)}
+.fta{resize:vertical;min-height:90px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.submit{width:100%;padding:1rem;background:var(--brown);color:var(--cream);border:none;border-radius:50px;font-family:var(--body);font-size:0.95rem;font-weight:500;cursor:pointer;margin-top:0.5rem;transition:background 0.2s;letter-spacing:0.04em}
+.submit:hover{background:var(--tan)}
+.ok{display:none;background:#E8F5E0;border:1.5px solid #9BC87A;border-radius:12px;padding:0.9rem 1.2rem;color:#3D6B1A;font-size:0.88rem;margin-bottom:1rem;font-weight:500}
+.ok.show{display:block}
+.oinfo{display:flex;flex-direction:column;gap:1rem}
+.icard{background:var(--cream);border-radius:18px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start}
+.icard-icon{font-size:1.6rem;flex-shrink:0}
+.icard-title{font-family:var(--display);font-size:1rem;font-weight:600;color:var(--brown);margin-bottom:0.2rem}
+.icard-text{font-size:0.84rem;color:var(--muted);line-height:1.65}
+
+/* TESTIMONIALS */
+.testi-sec{background:var(--cream)}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.4rem}
+.tcard{background:var(--white);border-radius:20px;padding:1.8rem;border-left:3px solid var(--blush)}
+.tstars{color:var(--tan);letter-spacing:2px;font-size:0.9rem;margin-bottom:0.8rem}
+.ttext{font-family:var(--display);font-style:italic;font-size:1.05rem;color:var(--dark);line-height:1.75;margin-bottom:1rem}
+.tauthor{font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--tan)}
+
+/* FOOTER */
+footer{background:var(--dark);color:var(--cream);padding:4rem 8% 2rem}
+.ftop{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+.fbrand{font-family:var(--display);font-size:2.2rem;font-style:italic;color:var(--cream);margin-bottom:0.3rem}
+.ftag{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--tan);margin-bottom:1rem}
+.fdesc{font-size:0.87rem;color:rgba(255,255,255,0.45);line-height:1.8;max-width:280px}
+.fh{font-size:0.7rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--tan);margin-bottom:1rem}
+.flinks{list-style:none}
+.flinks li{margin-bottom:0.6rem}
+.flinks a{text-decoration:none;color:rgba(255,255,255,0.55);font-size:0.87rem;transition:color 0.2s}
+.flinks a:hover{color:var(--cream)}
+.fbottom{border-top:0.5px solid rgba(255,255,255,0.1);padding-top:1.5rem;display:flex;align-items:center;justify-content:space-between;font-size:0.77rem;color:rgba(255,255,255,0.3)}
+
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:200;background:#25D366;color:white;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:transform 0.2s;animation:pulse 3s ease-in-out infinite}
+.wa-float:hover{transform:scale(1.1)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4)}50%{box-shadow:0 4px 32px rgba(37,211,102,0.65)}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:6rem 5% 4rem}
+  .about-sec{grid-template-columns:1fr}
+  .about-imgs{height:280px}
+  .order-grid{grid-template-columns:1fr}
+  .del-grid{grid-template-columns:1fr}
+  .ftop{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  section{padding:4rem 5%}
+}
+@media(max-width:600px){
+  .frow{grid-template-columns:1fr}
+  .ftop{grid-template-columns:1fr}
+  .hero-trust{gap:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<a class="wa-float" href="https://wa.me/27739380023" target="_blank" title="Order on WhatsApp">💬</a>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>By</span>Thandeka</div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#delivery">Delivery</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="https://wa.me/27739380023" class="nav-wa" target="_blank">Order on WhatsApp</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="toggleMenu()" id="tog"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-nav" id="mnav">
+  <a href="#menu" onclick="closeMenu()">Menu</a>
+  <a href="#about" onclick="closeMenu()">Our Story</a>
+  <a href="#delivery" onclick="closeMenu()">Delivery</a>
+  <a href="#order" onclick="closeMenu()">Order Now</a>
+  <a href="https://wa.me/27739380023" target="_blank">💬 WhatsApp Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-pill">Fresh baked · Pietermaritzburg</div>
+    <h1>Homemade bakes<br>that taste<br>like <em>love.</em></h1>
+    <p class="hero-sub">Every cupcake, cake, brownie and loaf is made fresh by hand in Thandeka's kitchen — no shortcuts, no preservatives, just real homemade goodness.</p>
+    <div class="hero-btns">
+      <a href="#order" class="btn btn-primary">Place an Order</a>
+      <a href="#menu" class="btn btn-ghost">Browse the Menu</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><div class="num">100%</div><div class="lbl">Homemade</div></div>
+      <div class="trust-item"><div class="num">0</div><div class="lbl">Preservatives</div></div>
+      <div class="trust-item"><div class="num">Made</div><div class="lbl">To order</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=900&q=80&fit=crop" alt="Beautiful homemade cakes and bakes"/>
+    <div class="hero-badge">
+      <div class="big">PMB</div>
+      <div class="small">Pietermaritzburg</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    Cupcakes <span class="mdot">♦</span> Muffins <span class="mdot">♦</span> Beerbox Cakes <span class="mdot">♦</span> Brownies <span class="mdot">♦</span> Scones <span class="mdot">♦</span> Banana Bread <span class="mdot">♦</span> Carrot Cake <span class="mdot">♦</span> Made to Order <span class="mdot">♦</span> Custom Flavours <span class="mdot">♦</span> Ready-made Stock <span class="mdot">♦</span> Snowballs <span class="mdot">♦</span> Cappuccino Flavour <span class="mdot">♦</span>
+    Cupcakes <span class="mdot">♦</span> Muffins <span class="mdot">♦</span> Beerbox Cakes <span class="mdot">♦</span> Brownies <span class="mdot">♦</span> Scones <span class="mdot">♦</span> Banana Bread <span class="mdot">♦</span> Carrot Cake <span class="mdot">♦</span> Made to Order <span class="mdot">♦</span> Custom Flavours <span class="mdot">♦</span> Ready-made Stock <span class="mdot">♦</span> Snowballs <span class="mdot">♦</span> Cappuccino Flavour <span class="mdot">♦</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section class="menu-sec" id="menu">
+  <div class="stag">What we bake</div>
+  <h2 class="stitle">Fresh from Thandeka's kitchen</h2>
+  <p class="ssub">Everything is made fresh to order. Ready-made stock also available for walk-ins and those who want a taste first.</p>
+
+  <div class="tabs">
+    <button class="tab on" onclick="switchTab(this,'cupcakes')">Cupcakes & Muffins</button>
+    <button class="tab" onclick="switchTab(this,'cakes')">Beerbox Cakes</button>
+    <button class="tab" onclick="switchTab(this,'brownies')">Brownies</button>
+    <button class="tab" onclick="switchTab(this,'scones')">Scones</button>
+    <button class="tab" onclick="switchTab(this,'bread')">Bread</button>
+  </div>
+
+  <div id="tab-cupcakes" class="mpanel on">
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1587668178277-295251f900ce?w=500&q=80&fit=crop" alt="Vanilla cupcakes"/></div><div class="mcard-body"><div class="mcard-name">Vanilla Cupcakes</div><div class="mcard-desc">Light, fluffy vanilla cupcakes. Available plain or with your choice of topping.</div><div class="mcard-foot"><span class="mcard-price">R60 plain · R90 topped (×6)</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1542826438-bd32f43d626f?w=500&q=80&fit=crop" alt="Chocolate cupcakes"/></div><div class="mcard-body"><div class="mcard-name">Chocolate Cupcakes</div><div class="mcard-desc">Rich chocolate cupcakes, moist and indulgent. Comes plain or fully topped.</div><div class="mcard-foot"><span class="mcard-price">R60 plain · R90 topped (×6)</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&q=80&fit=crop" alt="Cappuccino cupcakes"/></div><div class="mcard-body"><div class="mcard-name">Cappuccino Cupcakes</div><div class="mcard-desc">A coffee lover's dream — warm cappuccino flavour baked into every bite.</div><div class="mcard-foot"><span class="mcard-price">R60 plain · R90 topped (×6)</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=500&q=80&fit=crop" alt="Mixed cupcakes"/></div><div class="mcard-body"><div class="mcard-name">Mixed (Vanilla & Choc)</div><div class="mcard-desc">Half vanilla, half chocolate — perfect when you simply can't choose one.</div><div class="mcard-foot"><span class="mcard-price">R60 plain · R90 topped (×6)</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=500&q=80&fit=crop" alt="Snowballs"/></div><div class="mcard-body"><div class="mcard-name">Snowballs</div><div class="mcard-desc">Soft cake balls rolled in coconut — a classic South African favourite loved by all.</div><div class="mcard-foot"><span class="mcard-price">R60 plain · R90 topped (×6)</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&q=80&fit=crop" alt="12-pack box"/></div><div class="mcard-body"><div class="mcard-name">12-Pack Box</div><div class="mcard-desc">Double up! Any flavour or a mix of your choice in a box of 12. Great for events.</div><div class="mcard-foot"><span class="mcard-price">R120 plain · R180 topped</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+  </div>
+
+  <div id="tab-cakes" class="mpanel">
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=500&q=80&fit=crop" alt="Vanilla beerbox cake"/></div><div class="mcard-body"><div class="mcard-name">Vanilla Beerbox</div><div class="mcard-desc">Classic vanilla cake baked in a beerbox mould. Feeds roughly 15 people.</div><div class="mcard-foot"><span class="mcard-price">From R350</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&q=80&fit=crop" alt="Chocolate beerbox cake"/></div><div class="mcard-body"><div class="mcard-name">Chocolate Beerbox</div><div class="mcard-desc">Rich, decadent chocolate beerbox cake. Crowd-pleasing for every occasion.</div><div class="mcard-foot"><span class="mcard-price">From R350</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?w=500&q=80&fit=crop" alt="Snowball beerbox"/></div><div class="mcard-body"><div class="mcard-name">Snowball Beerbox</div><div class="mcard-desc">The SA favourite in a big box — soft cake covered in coconut. Always a hit.</div><div class="mcard-foot"><span class="mcard-price">From R400</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1519869325930-281384150729?w=500&q=80&fit=crop" alt="Mixed beerbox"/></div><div class="mcard-body"><div class="mcard-name">Mixed Beerbox</div><div class="mcard-desc">Vanilla and chocolate together — perfect for guests with different tastes.</div><div class="mcard-foot"><span class="mcard-price">From R350</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1567171466295-4afa63d45416?w=500&q=80&fit=crop" alt="Cappuccino beerbox"/></div><div class="mcard-body"><div class="mcard-name">Cappuccino Beerbox</div><div class="mcard-desc">Coffee-flavoured beerbox cake — unique, memorable, and deeply satisfying.</div><div class="mcard-foot"><span class="mcard-price">From R350</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&q=80&fit=crop" alt="Chocolate snowball beerbox"/></div><div class="mcard-body"><div class="mcard-name">Choc Snowball Beerbox</div><div class="mcard-desc">Chocolate cake with coconut topping — the best of both worlds in one big box.</div><div class="mcard-foot"><span class="mcard-price">From R400</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+  </div>
+
+  <div id="tab-brownies" class="mpanel">
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&q=80&fit=crop" alt="Classic brownies"/></div><div class="mcard-body"><div class="mcard-name">Classic Brownies</div><div class="mcard-desc">Thick, fudgy brownies with a crinkle top and gooey centre. Absolutely divine.</div><div class="mcard-foot"><span class="mcard-price">R130</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1519869325930-281384150729?w=500&q=80&fit=crop" alt="Coconut brownies"/></div><div class="mcard-body"><div class="mcard-name">Coconut Brownies</div><div class="mcard-desc">All the richness of our classic brownie, topped with a generous layer of coconut.</div><div class="mcard-foot"><span class="mcard-price">R160</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=500&q=80&fit=crop" alt="Carrot cake"/></div><div class="mcard-body"><div class="mcard-name">Carrot Cake</div><div class="mcard-desc">Moist, spiced carrot cake available in small, medium and large sizes.</div><div class="mcard-foot"><span class="mcard-price">From R130</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+  </div>
+
+  <div id="tab-scones" class="mpanel">
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&q=80&fit=crop" alt="Plain scones"/></div><div class="mcard-body"><div class="mcard-name">Plain Scones</div><div class="mcard-desc">Buttery, soft plain scones. Perfect with jam or cream. Sold by volume.</div><div class="mcard-foot"><span class="mcard-price">10L — R250</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1566843972142-a7fcb70de55b?w=500&q=80&fit=crop" alt="Raisin scones"/></div><div class="mcard-body"><div class="mcard-name">Raisin Scones</div><div class="mcard-desc">Classic scones packed with plump raisins throughout. A timeless favourite.</div><div class="mcard-foot"><span class="mcard-price">10L — R250</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1504113888839-1c8eb50233d3?w=500&q=80&fit=crop" alt="Assorted scones"/></div><div class="mcard-body"><div class="mcard-name">Assorted Scones</div><div class="mcard-desc">A generous mix of plain and raisin scones. Ideal for gatherings and teas.</div><div class="mcard-foot"><span class="mcard-price">20L — R450</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+  </div>
+
+  <div id="tab-bread" class="mpanel">
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc7c?w=500&q=80&fit=crop" alt="Homemade bread"/></div><div class="mcard-body"><div class="mcard-name">Homemade Loaf</div><div class="mcard-desc">Fresh, soft homemade bread. No preservatives — just the way bread should be.</div><div class="mcard-foot"><span class="mcard-price">R25</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+    <div class="mcard"><div class="mcard-img"><img src="https://images.unsplash.com/photo-1585478259715-4d4e50ded0e8?w=500&q=80&fit=crop" alt="Banana bread"/></div><div class="mcard-body"><div class="mcard-name">Banana Bread</div><div class="mcard-desc">Moist, fragrant banana bread baked fresh. A household favourite done right.</div><div class="mcard-foot"><span class="mcard-price">R45</span><a class="mcard-btn" href="#order">Order</a></div></div></div>
+  </div>
+
+  <div class="toppings-note">
+    <strong>Available toppings:</strong> Icing · Coconut · Cream · Nuts · Pecan Nuts · Sprinkles — mix and match to your liking. Mention your preference when ordering.
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="about-imgs">
+    <div class="about-img-big"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80&fit=crop" alt="Baker at work"/></div>
+    <div class="about-img-sm"><img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?w=400&q=80&fit=crop" alt="Fresh baked goods" style="height:100%;"/></div>
+    <div class="about-img-sm"><img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=400&q=80&fit=crop" alt="Baking ingredients" style="height:100%;"/></div>
+  </div>
+  <div class="about-content">
+    <div class="stag">Our story</div>
+    <h2 class="stitle">Baked with Thandeka's love</h2>
+    <p style="color:var(--muted);line-height:1.9;margin-bottom:1rem">What started as a family passion became something the whole neighbourhood fell in love with. Every item that leaves our kitchen is made by hand, the old-fashioned way — no shortcuts, no preservatives, just honest baking.</p>
+    <p style="color:var(--muted);line-height:1.9">Whether it's a birthday, a gathering, or just because you deserve a treat — By Thandeka is here to make it sweeter. Based right here in Pietermaritzburg, baked with pride.</p>
+    <div class="about-stats">
+      <div class="stat"><div class="num">100%</div><div class="lbl">Homemade</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">Preservatives</div></div>
+      <div class="stat"><div class="num">PMB</div><div class="lbl">Based & proud</div></div>
+    </div>
+    <div style="margin-top:2rem"><a href="#order" class="btn btn-primary">Order Now</a></div>
+  </div>
+</section>
+
+<!-- DELIVERY -->
+<section class="delivery-sec" id="delivery">
+  <div class="stag">Getting your order to you</div>
+  <h2 class="stitle">Delivery & collection</h2>
+  <p class="ssub">We make it easy. Collect for free, or let us bring your order to you.</p>
+  <div class="del-grid">
+    <div class="del-card">
+      <div class="del-icon">🏠</div>
+      <div class="del-title">Collection</div>
+      <div class="del-price">Free</div>
+      <div class="del-desc">Collect your order directly from us at no extra cost. We'll confirm a convenient time on WhatsApp.</div>
+    </div>
+    <div class="del-card">
+      <div class="del-icon">🚗</div>
+      <div class="del-title">Local Delivery</div>
+      <div class="del-price">+R30</div>
+      <div class="del-desc">For customers close to us in the local area. Quick, reliable, and straight to your door.</div>
+    </div>
+    <div class="del-card">
+      <div class="del-icon">📍</div>
+      <div class="del-title">PMB CBD & Surrounds</div>
+      <div class="del-price">+R50</div>
+      <div class="del-desc">We deliver across the Pietermaritzburg CBD and surrounding areas. Confirm your area on WhatsApp.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="order-sec" id="order">
+  <div class="stag">Place an order</div>
+  <h2 class="stitle">Let's bake something special</h2>
+  <p class="ssub">Fill in the form and we'll be in touch within 24 hours to confirm your order. Or WhatsApp us directly for a faster response.</p>
+
+  <div class="order-grid">
+    <div class="oform">
+      <div class="oform-title">Order Request</div>
+      <div class="ok" id="ok-msg">Your order request has been sent! We'll be in touch on WhatsApp shortly.</div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Your Name</label><input class="fi" id="f-name" type="text" placeholder="e.g. Sipho Dlamini"/></div>
+        <div class="fg"><label class="fl">WhatsApp Number</label><input class="fi" id="f-phone" type="tel" placeholder="e.g. 082 000 0000"/></div>
+      </div>
+      <div class="fg"><label class="fl">What would you like?</label>
+        <select class="fs" id="f-item">
+          <option value="">Select a product...</option>
+          <option>Vanilla Cupcakes (×6 or ×12)</option>
+          <option>Chocolate Cupcakes (×6 or ×12)</option>
+          <option>Cappuccino Cupcakes (×6 or ×12)</option>
+          <option>Mixed Cupcakes (×6 or ×12)</option>
+          <option>Snowballs (×6 or ×12)</option>
+          <option>Beerbox Cake</option>
+          <option>Brownies</option>
+          <option>Scones</option>
+          <option>Homemade Bread</option>
+          <option>Banana Bread</option>
+          <option>Carrot Cake</option>
+          <option>Custom / Mixed Order</option>
+        </select>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Date Needed</label><input class="fi" id="f-date" type="date"/></div>
+        <div class="fg"><label class="fl">Delivery or Collection?</label>
+          <select class="fs" id="f-del">
+            <option value="">Select...</option>
+            <option>Collection (Free)</option>
+            <option>Local Delivery (+R30)</option>
+            <option>PMB CBD & Surrounds (+R50)</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label class="fl">Special Instructions</label><textarea class="fta" id="f-notes" placeholder="Flavour preferences, toppings, quantity, theme, dietary needs..."></textarea></div>
+      <button class="submit" onclick="submitOrder()">Send Order Request →</button>
+    </div>
+
+    <div class="oinfo">
+      <div class="icard"><div class="icard-icon">💬</div><div><div class="icard-title">We confirm via WhatsApp</div><div class="icard-text">After you submit, we'll reach out to confirm your order details, discuss any customisations and arrange payment.</div></div></div>
+      <div class="icard"><div class="icard-icon">⏰</div><div><div class="icard-title">Order at least 3 days ahead</div><div class="icard-text">All items are made fresh to order. We recommend ordering 3–5 days in advance, especially for beerbox cakes and custom orders.</div></div></div>
+      <div class="icard"><div class="icard-icon">💳</div><div><div class="icard-title">Payment & deposit</div><div class="icard-text">We accept EFT and cash. A 50% deposit is required to confirm and begin your order. Balance is paid on delivery or collection.</div></div></div>
+      <div class="icard"><div class="icard-icon">📦</div><div><div class="icard-title">Professional packaging</div><div class="icard-text">All orders come in branded By Thandeka packaging — presentable, protected, and ready to give as a gift.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="stag">What people say</div>
+  <h2 class="stitle">Made with love, tasted with joy</h2>
+  <p class="ssub">A few words from some of our happy customers.</p>
+  <div class="tgrid">
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="ttext">"The beerbox cake for my daughter's party was absolutely stunning. Everyone was asking who made it — so proud to say it was By Thandeka!"</div><div class="tauthor">— Zanele M., PMB</div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="ttext">"The brownies are out of this world. I ordered two batches for our office and they disappeared in minutes. Will definitely order again."</div><div class="tauthor">— Priya N., PMB North</div></div>
+    <div class="tcard"><div class="tstars">★★★★★</div><div class="ttext">"Best cupcakes I've had in PMB. The cappuccino ones are something else. Packaging was beautiful too — felt so professional."</div><div class="tauthor">— Themba K., Northdale</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftop">
+    <div>
+      <div class="fbrand">Thandeka</div>
+      <div class="ftag">Homemade</div>
+      <div class="fdesc">Freshly baked, made by hand, with love — right here in Pietermaritzburg. No preservatives, no shortcuts. Just real homemade goodness.</div>
+    </div>
+    <div>
+      <div class="fh">Quick Links</div>
+      <ul class="flinks">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">Our Story</a></li>
+        <li><a href="#delivery">Delivery</a></li>
+        <li><a href="#order">Order Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Get in Touch</div>
+      <ul class="flinks">
+        <li><a href="https://wa.me/27739380023" target="_blank">💬 WhatsApp</a></li>
+        <li><a href="#">📸 Instagram</a></li>
+        <li><a href="#">📘 Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbottom">
+    <span>© 2025 By Thandeka. All rights reserved. Pietermaritzburg, KwaZulu-Natal.</span>
+    <span>Made with ♡ in PMB</span>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('mnav').classList.toggle('open')}
+function closeMenu(){document.getElementById('mnav').classList.remove('open')}
+
+function switchTab(btn,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.mpanel').forEach(p=>{p.classList.remove('on');p.style.display='none'});
+  btn.classList.add('on');
+  const p=document.getElementById('tab-'+id);
+  p.style.display='grid';
+  p.classList.add('on');
+}
+
+function submitOrder(){
+  const name=document.getElementById('f-name').value.trim();
+  const phone=document.getElementById('f-phone').value.trim();
+  const item=document.getElementById('f-item').value;
+  if(!name||!phone||!item){alert('Please fill in your name, WhatsApp number, and what you would like to order.');return}
+  const msg=document.getElementById('ok-msg');
+  msg.classList.add('show');
+  document.getElementById('f-name').value='';
+  document.getElementById('f-phone').value='';
+  document.getElementById('f-item').value='';
+  document.getElementById('f-date').value='';
+  document.getElementById('f-del').value='';
+  document.getElementById('f-notes').value='';
+  setTimeout(()=>msg.classList.remove('show'),6000);
+}
+
+document.getElementById('tab-cupcakes').style.display='grid';
+</script>
+</body>
+</html>
