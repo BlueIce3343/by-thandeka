@@ -359,15 +359,14 @@ footer{background:var(--dark);color:var(--cream);padding:4rem 8% 2rem}
   <p class="ssub">Fill in the form and we'll be in touch within 24 hours to confirm your order. Or WhatsApp us directly for a faster response.</p>
 
   <div class="order-grid">
-    <div class="oform">
+    <form class="oform" action="https://formspree.io/f/xyzqwlvq" method="POST">
       <div class="oform-title">Order Request</div>
-      <div class="ok" id="ok-msg">Your order request has been sent! We'll be in touch on WhatsApp shortly.</div>
       <div class="frow">
-        <div class="fg"><label class="fl">Your Name</label><input class="fi" id="f-name" type="text" placeholder="e.g. Sipho Dlamini"/></div>
-        <div class="fg"><label class="fl">WhatsApp Number</label><input class="fi" id="f-phone" type="tel" placeholder="e.g. 082 000 0000"/></div>
+        <div class="fg"><label class="fl">Your Name</label><input class="fi" type="text" name="name" placeholder="e.g. Sipho Dlamini" required/></div>
+        <div class="fg"><label class="fl">WhatsApp Number</label><input class="fi" type="tel" name="phone" placeholder="e.g. 082 000 0000" required/></div>
       </div>
       <div class="fg"><label class="fl">What would you like?</label>
-        <select class="fs" id="f-item">
+        <select class="fs" name="product" required>
           <option value="">Select a product...</option>
           <option>Vanilla Cupcakes (×6 or ×12)</option>
           <option>Chocolate Cupcakes (×6 or ×12)</option>
@@ -384,9 +383,9 @@ footer{background:var(--dark);color:var(--cream);padding:4rem 8% 2rem}
         </select>
       </div>
       <div class="frow">
-        <div class="fg"><label class="fl">Date Needed</label><input class="fi" id="f-date" type="date"/></div>
+        <div class="fg"><label class="fl">Date Needed</label><input class="fi" type="date" name="date_needed"/></div>
         <div class="fg"><label class="fl">Delivery or Collection?</label>
-          <select class="fs" id="f-del">
+          <select class="fs" name="delivery_type">
             <option value="">Select...</option>
             <option>Collection (Free)</option>
             <option>Local Delivery (+R30)</option>
@@ -394,9 +393,9 @@ footer{background:var(--dark);color:var(--cream);padding:4rem 8% 2rem}
           </select>
         </div>
       </div>
-      <div class="fg"><label class="fl">Special Instructions</label><textarea class="fta" id="f-notes" placeholder="Flavour preferences, toppings, quantity, theme, dietary needs..."></textarea></div>
-      <button class="submit" onclick="submitOrder()">Send Order Request →</button>
-    </div>
+      <div class="fg"><label class="fl">Special Instructions</label><textarea class="fta" name="instructions" placeholder="Flavour preferences, toppings, quantity, theme, dietary needs..."></textarea></div>
+      <button class="submit" type="submit">Send Order Request →</button>
+    </form>
 
     <div class="oinfo">
       <div class="icard"><div class="icard-icon">💬</div><div><div class="icard-title">We confirm via WhatsApp</div><div class="icard-text">After you submit, we'll reach out to confirm your order details, discuss any customisations and arrange payment.</div></div></div>
@@ -462,22 +461,6 @@ function switchTab(btn,id){
   const p=document.getElementById('tab-'+id);
   p.style.display='grid';
   p.classList.add('on');
-}
-
-function submitOrder(){
-  const name=document.getElementById('f-name').value.trim();
-  const phone=document.getElementById('f-phone').value.trim();
-  const item=document.getElementById('f-item').value;
-  if(!name||!phone||!item){alert('Please fill in your name, WhatsApp number, and what you would like to order.');return}
-  const msg=document.getElementById('ok-msg');
-  msg.classList.add('show');
-  document.getElementById('f-name').value='';
-  document.getElementById('f-phone').value='';
-  document.getElementById('f-item').value='';
-  document.getElementById('f-date').value='';
-  document.getElementById('f-del').value='';
-  document.getElementById('f-notes').value='';
-  setTimeout(()=>msg.classList.remove('show'),6000);
 }
 
 document.getElementById('tab-cupcakes').style.display='grid';
